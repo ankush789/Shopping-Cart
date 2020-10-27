@@ -2,54 +2,6 @@ import React from 'react';
 
 class CartItem extends React.Component {
 
-
-    // testing = ()=>{
-    //     const promise = new Promise((resolve,reject)=>{
-    //         setTimeout(() => {
-    //             resolve('done');
-    //         }, 3000 );
-    //     })
-    //     //setState acts as as synchronous call
-    //     promise.then(()=>{
-    //         this.setState({ qty: this.state.qty + 10 });
-    //         this.setState({ qty: this.state.qty + 10 });
-    //         console.log(this.state)
-    //     })
-        
-
-    // }
-
-    // third way is to use arrow functions -> implicitly bind 'this' to the function
-    increaseQuantity= () => {
-        //setState Form 1
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // })
-
-
-        // setState Form 2
-        //Set state call is asynchronous , so a callback function will be executed 
-        // once setState is finished
-        this.setState((prevState) =>{
-            return {
-                 qty: prevState.qty + 1
-            }
-        }, () => {
-            console.log(this.state);
-        })
-        
-    }
-        decreaseQuantity= () => {
-        const { qty } = this.state;
-        if(qty === 0){
-            return;
-        }
-        this.setState((prevState) =>{
-            return {
-                    qty: prevState.qty - 1
-                }
-        })
-    }
     render(){
         // Props is a object
         // console.log("this.props",this.props);
@@ -68,11 +20,10 @@ class CartItem extends React.Component {
                     <div className="cart-item-actions">
                         <img alt="increase" className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/992/992651.svg" 
-                        // onClick={this.increaseQuantity.bind(this) }/>
-                        onClick = {this.increaseQuantity} />
+                        onClick = {() => this.props.onIncreaseQuantity(this.props.product)} />
                         <img alt="decrease" className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
-                         onClick = {this.decreaseQuantity} />
+                         onClick = {() => this.props.onDecreaseQuantity(this.props.product)} />
                         <img alt="delete" className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/1214/1214428.svg" />
                     </div>
