@@ -12,21 +12,31 @@ class CartItem extends React.Component {
         // 2nd way to bind this
         // this.increaseQuantity = this.increaseQuantity.bind(this);
     }
-    // third way is to use arrow functions
+    // third way is to use arrow functions -> implicitly bind 'this' to the function
     increaseQuantity= () => {
-        //Form 1
+        //setState Form 1
         // this.setState({
         //     qty: this.state.qty + 1
         // })
-        // Form 2 to setState
+
+
+        // setState Form 2
+        //Set state call is asynchronous , so a callback function will be executed 
+        // once setState is finished
         this.setState((prevState) =>{
             return {
                  qty: prevState.qty + 1
             }
+        }, () => {
+            console.log(this.state);
         })
+        
     }
         decreaseQuantity= () => {
-        if(this.state.qty > 0)
+        const { qty } = this.state;
+        if(qty === 0){
+            return;
+        }
         this.setState((prevState) =>{
             return {
                     qty: prevState.qty - 1
