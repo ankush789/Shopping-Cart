@@ -9,9 +9,33 @@ class CartItem extends React.Component {
           qty: 1,
           img: ''
         }
+        this.testing();
         // 2nd way to bind this
         // this.increaseQuantity = this.increaseQuantity.bind(this);
     }
+
+    testing = ()=>{
+        const promise = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve('done');
+            }, 3000 );
+        })
+        //setState acts as as synchronous call
+        promise.then(()=>{
+            this.setState({ qty: this.state.qty + 10 });
+            this.setState({ qty: this.state.qty + 10 });
+            console.log(this.state)
+        })
+        
+
+    }
+
+
+
+
+
+
+
     // third way is to use arrow functions -> implicitly bind 'this' to the function
     increaseQuantity= () => {
         //setState Form 1
