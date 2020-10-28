@@ -34,7 +34,7 @@ class Cart extends React.Component {
         const { products } = this.state;
         const index = products.indexOf(product);
         products[index].qty += 1;
-
+        //this re-renders the cart items having updated quantity
         this.setState({
             products: products
         })
