@@ -2,33 +2,12 @@ import React from 'react';
 import Cart from './Cart';
 import Navbar from './Navbar';
 
+
 class App extends React.Component {
           constructor(){
         super();
         this.state = {
-            products: [
-            {
-                title:'Phone',
-                price:999,
-                qty: 4,
-                img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
-                id: 1
-            },
-            {
-                title:'Laptop',
-                price:99999,
-                qty: 2,
-                img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80',
-                id: 2
-            },
-            {
-                title:'Watch',
-                price:99,
-                qty: 4,
-                img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=989&q=80',
-                id: 3
-            }  
-         ]
+            products: []
         }
     }
     handleIncreaseQuantity = (product) => {
@@ -39,7 +18,6 @@ class App extends React.Component {
         this.setState({
             products: products
         })
-        console.log('product',product);
     }
 
      handleDecreaseQuantity = (product) => {
@@ -53,7 +31,6 @@ class App extends React.Component {
         this.setState({
             products: products
         })
-        console.log('product',product);
     }
     handleonDeleteProduct = (id) =>{
         const { products } = this.state;
@@ -100,3 +77,29 @@ class App extends React.Component {
   }
 }
 export default App;
+
+
+
+
+
+//  {
+//                 title:'Phone',
+//                 price:999,
+//                 qty: 4,
+//                 img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
+//                 id: 1
+//             },
+//             {
+//                 title:'Laptop',
+//                 price:99999,
+//                 qty: 2,
+//                 img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80',
+//                 id: 2
+//             },
+//             {
+//                 title:'Watch',
+//                 price:99,
+//                 qty: 4,
+//                 img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=989&q=80',
+//                 id: 3
+//             } 
