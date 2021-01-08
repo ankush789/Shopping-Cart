@@ -1,17 +1,12 @@
 import React from 'react';
 
-class CartItem extends React.Component {
-        // this.props is a object
-        // console.log("this.this.props",this.this.props);
-        constructor(){
-            super();
-    
-        }
+const CartItem = (props) => {
+        // Props is a object
+        // console.log("this.props",this.props);
+        
         //Desconstructing object
-        render(){
-                    console.log(this.props);
-        const { title, price, qty } = this.props.product;
-       const { product, onIncreaseQuantity, onDecreaseQuantity,onDeleteProduct } = this.props;
+        const { title, price, qty } = props.product;
+        const { product, onIncreaseQuantity, onDecreaseQuantity,onDeleteProduct } = props;
         return(
             <div className="cart-item">
                 <div className="left-block">
@@ -24,18 +19,17 @@ class CartItem extends React.Component {
                     <div className="cart-item-actions">
                         <img alt="increase" className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/992/992651.svg" 
-                        onClick = {()=>onIncreaseQuantity(product)} />
-                        {/* <img alt="decrease" className="action-icons" 
+                        onClick = {() => onIncreaseQuantity(product)} />
+                        <img alt="decrease" className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
-                         onClick = {onDecreaseQuantity(product)} />
+                         onClick = {() => onDecreaseQuantity(product)} />
                         <img alt="delete" className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/1214/1214428.svg"
-                        onClick = {onDeleteProduct(product.id)}/> */}
+                        onClick = {() => onDeleteProduct(product.id)}/>
                     </div>
                 </div>
             </div>
         );
-    }
 }
 const styles = {
     image: {

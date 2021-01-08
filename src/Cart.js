@@ -2,7 +2,7 @@ import React from 'react';
 import CartItem from './CartItem';
 
 const Cart = (props) => {
-        const { products, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct , totalPrice } = props;
+        const { products, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = props;
         return (
             <div>
                 <div className="cart">
@@ -14,9 +14,6 @@ const Cart = (props) => {
                             onDeleteProduct = { onDeleteProduct }/>
                         })
                     }
-                </div>
-                <div style = {{padding: 10}}>
-                        Total Price: {totalPrice}
                 </div>
             </div>
         );
