@@ -12,7 +12,7 @@ class App extends React.Component {
             products: [],
             loading: true
         }
-        
+        this.db = firebase.firestore();
     }
     
     componentDidMount(){
@@ -38,8 +38,7 @@ class App extends React.Component {
 
     //Added a onSnapshot EventListener which checks for the changes in querySnapshot
     //It automatically rerender the changes when ever any value is updated in firestore
-    firebase
-      .firestore()
+    this.db
       .collection('products')
       .onSnapshot((querySnapshot)=>{
         const products = querySnapshot.docs.map((doc)=>{
@@ -103,6 +102,21 @@ class App extends React.Component {
       })
       return totalPrice;
     }
+    //Adding a product to cloud firestore
+    addProduct = () => {
+      this.db
+      .collection('products')
+      .add({
+        img:'',
+        price: '7894',
+        qty: 9,
+        title:'camera'
+      }).then((docRef)=>{
+        console.log('Product has been added',docRef);
+      }).catch((error)=>{
+        console.log('Error:',error);
+      });
+    }
 
     render(){
       
@@ -123,6 +137,7 @@ class App extends React.Component {
           <div style = {{padding: 10}}>
               Total Price: {this.getTotalPrice()}
           </div>
+          <button style = {{fontSize: 20,padding:8, marginLeft: 10,color: 'red'}} onClick={this.addProduct}>Add Button</button>
         </div>
       );
   }
