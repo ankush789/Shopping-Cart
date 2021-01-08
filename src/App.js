@@ -17,11 +17,31 @@ class App extends React.Component {
     
     componentDidMount(){
       //Reading Data from the 'products' collection in firestore
-      firebase
+    //   firebase
+    //   .firestore()
+    //   .collection('products')
+    //   .get()
+    //   .then((querySnapshot)=>{
+    //     const products = querySnapshot.docs.map((doc)=>{
+    //       const data = doc.data();
+
+    //       data['id'] = doc.id;
+    //       return data;
+    //     })
+    //     this.setState({
+    //       products,
+    //       loading : false
+    //     })
+    //   });
+    
+    // }
+
+    //Added a onSnapshot EventListener which checks for the changes in querySnapshot
+    //It automatically rerender the changes when ever any value is updated in firestore
+    firebase
       .firestore()
       .collection('products')
-      .get()
-      .then((querySnapshot)=>{
+      .onSnapshot((querySnapshot)=>{
         const products = querySnapshot.docs.map((doc)=>{
           const data = doc.data();
 
@@ -35,7 +55,6 @@ class App extends React.Component {
       });
     
     }
-
 
     handleIncreaseQuantity = (product) => {
         const { products } = this.state;
