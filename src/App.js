@@ -40,6 +40,10 @@ class App extends React.Component {
     //It automatically rerender the changes when ever any value is updated in firestore
     this.db
       .collection('products')
+      .limit(2)
+      // .where('qty','==',9)
+      // .orderBy('price','desc')
+      // .where('title','==','Laptop')
       .onSnapshot((querySnapshot)=>{
         const products = querySnapshot.docs.map((doc)=>{
           const data = doc.data();
@@ -99,10 +103,21 @@ class App extends React.Component {
     }
     handleonDeleteProduct = (id) =>{
         const { products } = this.state;
-        const items = products.filter((item)=> item.id !== id); // returns [{},{},{}]
-        this.setState({
-            products: items
+
+        const docRef = this.db.collection('products').doc(id);
+
+        docRef.delete().then(()=>{
+          console.log('Successfully Deleted')
         })
+        .catch((error)=>{
+          console.log('Error',error);
+        });
+
+        // const items = products.filter((item)=> item.id !== id); // returns [{},{},{}]
+        // this.setState({
+        //     products: items
+        // })
+
     }
 
     getTotalCartItem(){
@@ -128,9 +143,9 @@ class App extends React.Component {
       .collection('products')
       .add({
         img:'',
-        price: '7894',
+        price: 30000,
         qty: 9,
-        title:'camera'
+        title:'Laptop'
       }).then((docRef)=>{
         console.log('Product has been added',docRef);
       }).catch((error)=>{
@@ -157,7 +172,7 @@ class App extends React.Component {
           <div style = {{padding: 10}}>
               Total Price: {this.getTotalPrice()}
           </div>
-          {/* <button style = {{fontSize: 20,padding:8, marginLeft: 10,color: 'red'}} onClick={this.addProduct}>Add Button</button> */}
+          <button style = {{fontSize: 20,padding:8, marginLeft: 10,color: 'red'}} onClick={this.addProduct}>Add Button</button>
         </div>
       );
   }
