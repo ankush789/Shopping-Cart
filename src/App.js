@@ -58,11 +58,21 @@ class App extends React.Component {
     handleIncreaseQuantity = (product) => {
         const { products } = this.state;
         const index = products.indexOf(product);
-        products[index].qty += 1;
-        //this re-renders the cart items having updated quantity
-        this.setState({
-            products: products
+        
+        //Updating quantity to the firestore
+        const docRef = this.db.collection('products').doc(product.id);
+        docRef.update({
+          qty: product.qty + 1
+        }).then(()=>{
+          console.log('Updated Successfully');
+        }).catch((error) => {
+          console.log('Error:',error);
         })
+        // products[index].qty += 1;
+        // //this re-renders the cart items having updated quantity
+        // this.setState({
+        //     products: products
+        // })
     }
 
      handleDecreaseQuantity = (product) => {
@@ -71,11 +81,21 @@ class App extends React.Component {
         if(products[index].qty === 0){
             return;
         }
-        products[index].qty -= 1;
+        const docRef = this.db.collection('products').doc(product.id);
 
-        this.setState({
-            products: products
-        })
+        //Updating quantity to the firebase
+        docRef.update({
+          qty: product.qty-1
+        }).then(()=>{
+          console.log('Updated Successfully');
+        }).catch((error)=>{
+          console.log('Error',error);
+        });
+        // products[index].qty -= 1;
+
+        // this.setState({
+        //     products: products
+        // })
     }
     handleonDeleteProduct = (id) =>{
         const { products } = this.state;
@@ -137,7 +157,7 @@ class App extends React.Component {
           <div style = {{padding: 10}}>
               Total Price: {this.getTotalPrice()}
           </div>
-          <button style = {{fontSize: 20,padding:8, marginLeft: 10,color: 'red'}} onClick={this.addProduct}>Add Button</button>
+          {/* <button style = {{fontSize: 20,padding:8, marginLeft: 10,color: 'red'}} onClick={this.addProduct}>Add Button</button> */}
         </div>
       );
   }
